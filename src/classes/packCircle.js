@@ -7,6 +7,7 @@ class PackCircle {
   }
 
   buildChart() {
+
     let years = d3.nest()
       .key(d => d.decade)
       .key(d => d.year)
@@ -19,7 +20,7 @@ class PackCircle {
     let root = d3.hierarchy(hier[0], d => d.values);
 
     let packLayout = d3.pack()
-      .size([600, 600])
+      .size([1000, 1000])
       .padding(2)
       (root.sum(d => d.budget));
 
@@ -30,15 +31,31 @@ class PackCircle {
       .attr("height", 1000)
       .attr("width", 1000);
 
-    let nodes = canvas.selectAll("circle")
+    let nodes = canvas.selectAll("g")
       .data(allNodes)
       .enter()
+      .append("g")
+      .attr('transform', d => 'translate(' + [d.x, d.y] + ')')
+
+    let circles = nodes
       .append("circle")
-      .attr("cx", d => d.x)
-      .attr("cy", d => d.y)
       .attr("r", d => d.r)
       .attr("stroke", d => !d.parent ? "white" : "white")
-      .attr("fill", d => d.children ? "black" : d.data.pass ? "white" : "red");
+      .attr("fill", d => d.children ? "black" : d.data.pass ? "white" : "red")
+
+    let text = nodes
+      .append("text")
+      .text( d=> 'hey')
+
+    // let nodes = canvas.selectAll("circle")
+    //   .data(allNodes)
+    //   .enter()
+    //   .append("circle")
+    //   .attr("cx", d => d.x)
+    //   .attr("cy", d => d.y)
+    //   .attr("r", d => d.r)
+    //   .attr("stroke", d => !d.parent ? "white" : "white")
+    //   .attr("fill", d => d.children ? "black" : d.data.pass ? "white" : "red");
   }
 };
 
