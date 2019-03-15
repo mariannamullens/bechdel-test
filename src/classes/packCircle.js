@@ -8,16 +8,19 @@ class PackCircle {
 
   buildChart() {
 
-    let years = d3.nest()
+    let hier = d3.nest()
+      .key(() => 'key')
       .key(d => d.decade)
       .key(d => d.year)
       .entries(this.dataset);
 
-    let hier = d3.nest()
-      .key(() => 'key')
-      .entries(years);
+    // let hier = d3.nest()
+    //   .key(() => 'key')
+    //   .entries(years);
 
     let root = d3.hierarchy(hier[0], d => d.values);
+    let focus = root;
+    let view;
 
     let packLayout = d3.pack()
       .size([1000, 1000])
@@ -35,13 +38,25 @@ class PackCircle {
       .data(allNodes)
       .enter()
       .append("g")
-      .attr('transform', d => 'translate(' + [d.x, d.y] + ')')
+      .attr('transform', d => 'translate(' + [d.x, d.y] + ')');
 
     let circles = nodes
       .append("circle")
       .attr("r", d => d.r)
       .attr("stroke", d => !d.parent ? "white" : "white")
       .attr("fill", d => d.children ? "black" : d.data.pass ? "white" : "red")
+      .on("click", function(d) { 
+        d3.select(this)
+          .attr("r", d.r * 3)
+          .attr("z-index", 3)
+
+        console.log(d.children)
+
+        d3.select(d.children)
+          .attr("r", d => console.log(d))
+          .attr("z-index", 3)
+          .attr("fill", "green")
+         });
 
     let text = nodes
       .append("text")
@@ -57,6 +72,16 @@ class PackCircle {
     //   .attr("stroke", d => !d.parent ? "white" : "white")
     //   .attr("fill", d => d.children ? "black" : d.data.pass ? "white" : "red");
   }
+
+  // zoom(d, canvas) {
+  //   let view;
+  //   const transition = canvas.transition()
+  //     .duration(d3.event.altKey ? 7500 : 750)
+  //     .tween("zoom", d => {
+  //       const i = d3.interpolateZoom(view, [d.x, d.y, d.r * 2]);
+  //       return t => zoomTo(i(t));
+  //     });
+  // }
 };
 
 export default PackCircle;
