@@ -2,19 +2,22 @@ import * as d3 from 'd3';
 import CalendarChart from './classes/calendar';
 import PackCircle from './classes/packCircle';
 
-let dataset = d3.csv("/movies.csv", function(d) {
-  return {
-    pass: d.binary === "FAIL" ? false : true,
-    year: d.year,
-    title: d.title,
-    budget: +d.domgross,
-    decade: `${d.year.slice(0,3)}0`,
-  };
+document.addEventListener("DOMContentLoaded", function (event) {
+  let dataset = d3.csv("./movies.csv", function (d) {
+    return {
+      pass: d.binary === "FAIL" ? false : true,
+      year: d.year,
+      title: d.title,
+      budget: +d.domgross,
+      decade: `${d.year.slice(0, 3)}0`,
+    };
+  });
+
+  dataset.then(res => {
+    let pc = new PackCircle(res);
+  });
 });
 
-dataset.then( res => {
-  let pc = new PackCircle(res);
-});
 
 // dataset.then(res => {
 //   years = d3.nest()
@@ -55,4 +58,4 @@ dataset.then( res => {
 //     .attr("fill", d => d.children ? "black" : d.data.pass ? "white" : "red");
 // });
 
-console.log("working");
+console.log("this should not be broken");
