@@ -14,74 +14,69 @@ class PackCircle {
       .key(d => d.year)
       .entries(this.dataset);
 
-    // let hier = d3.nest()
-    //   .key(() => 'key')
-    //   .entries(years);
-
     let root = d3.hierarchy(hier[0], d => d.values);
-    let focus = root;
-    let view;
 
     let packLayout = d3.pack()
-      .size([1000, 1000])
-      .padding(2)
+      .size([750, 750])
       (root.sum(d => d.budget));
 
     let allNodes = root.descendants();
+    let focus = packLayout;
+    let view;
 
     const canvas = d3.select(".canvas")
       .append("svg")
-      .attr("height", 1000)
-      .attr("width", 1000);
+      .attr("height", 750)
+      .attr("width", 750);
 
     let nodes = canvas.selectAll("g")
       .data(allNodes)
       .enter()
       .append("g")
-      .attr('transform', d => 'translate(' + [d.x, d.y] + ')');
+      .attr('transform', d => 'translate(' + [375, 375] + ')');
 
     let circles = nodes
       .append("circle")
       .attr("r", d => d.r)
       .attr("stroke", d => !d.parent ? "white" : "white")
       .attr("fill", d => d.children ? "black" : d.data.pass ? "white" : "red")
-      .on("click", function(d) { 
-        d3.select(this)
-          .attr("r", d.r * 3)
-          .attr("z-index", 3)
-
-        console.log(d.children)
-
-        d3.select(d.children)
-          .attr("r", d => console.log(d))
-          .attr("z-index", 3)
-          .attr("fill", "green")
-         });
+      .on("click", d => focus !== d && (zoom(d), d3.event.stopPropagation()));
 
     let text = nodes
       .append("text")
-      .text( d=> 'hey')
+      .text( d=> 'hey');
 
-    // let nodes = canvas.selectAll("circle")
-    //   .data(allNodes)
-    //   .enter()
-    //   .append("circle")
-    //   .attr("cx", d => d.x)
-    //   .attr("cy", d => d.y)
-    //   .attr("r", d => d.r)
-    //   .attr("stroke", d => !d.parent ? "white" : "white")
-    //   .attr("fill", d => d.children ? "black" : d.data.pass ? "white" : "red");
+    zoomTo([packLayout.x, packLayout.y, packLayout.r * 2]);
+
+    function zoomTo(v) {
+      const k = 750 / v[2];
+
+      view = v;
+
+      text.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
+      circles.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
+      circles.attr("r", d => d.r * k);
+    }
+
+    function zoom(d) {
+      // const focus0 = focus;
+
+      focus = d;
+
+      const transition = canvas.transition()
+        .tween("zoom", d => {
+          const i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2]);
+          return t => zoomTo(i(t));
+        });
+
+      text
+        .filter(function (d) { return d.parent === focus || this.style.display === "inline"; })
+        .transition(transition)
+        .style("fill-opacity", d => d.parent === focus ? 1 : 0)
+        .on("start", function (d) { if (d.parent === focus) this.style.display = "inline"; })
+        .on("end", function (d) { if (d.parent !== focus) this.style.display = "none"; });
+    }
   }
-
-  // zoom(d, canvas) {
-  //   let view;
-  //   const transition = canvas.transition()
-  //     .duration(d3.event.altKey ? 7500 : 750)
-  //     .tween("zoom", d => {
-  //       const i = d3.interpolateZoom(view, [d.x, d.y, d.r * 2]);
-  //       return t => zoomTo(i(t));
-  //     });
-  // }
 };
 
 export default PackCircle;
