@@ -27,24 +27,27 @@ class PackCircle {
     const canvas = d3.select(".canvas")
       .append("svg")
       .attr("height", 750)
-      .attr("width", 750);
+      .attr("width", 750)
+      .classed("pack-circle", true);
 
     let nodes = canvas.selectAll("g")
       .data(allNodes)
       .enter()
       .append("g")
-      .attr('transform', d => 'translate(' + [375, 375] + ')');
+      .attr('transform', d => 'translate(' + [375, 375] + ')')
+      .style('text-anchor', 'middle');
 
     let circles = nodes
       .append("circle")
       .attr("r", d => d.r)
-      .attr("stroke", d => !d.parent ? "white" : "white")
+      .attr("stroke", d => !d.children ? "" : "white")
       .attr("fill", d => d.children ? "black" : d.data.pass ? "white" : "red")
       .on("click", d => focus !== d && (zoom(d), d3.event.stopPropagation()));
 
     let text = nodes
       .append("text")
-      .text( d=> 'hey');
+      .text( d => d.data.title)
+      .style("display", d => d.parent === focus ? "inline" : "none");
 
     zoomTo([packLayout.x, packLayout.y, packLayout.r * 2]);
 
@@ -70,11 +73,11 @@ class PackCircle {
         });
 
       text
-        .filter(function (d) { return d.parent === focus || this.style.display === "inline"; })
+        // .filter(function (d) { return d.parent === focus || this.style.display === "inline"; })
         .transition(transition)
-        .style("fill-opacity", d => d.parent === focus ? 1 : 0)
-        .on("start", function (d) { if (d.parent === focus) this.style.display = "inline"; })
-        .on("end", function (d) { if (d.parent !== focus) this.style.display = "none"; });
+        // .style("fill-opacity", d => d.parent === focus ? 1 : .5)
+        .on("start", function (d) { if (d.parent === focus || d === focus) this.style.display = "inline"; })
+        .on("end", function (d) { if (d.parent !== focus && d !== focus ) this.style.display = "none"; });
     }
   }
 };

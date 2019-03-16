@@ -1,0 +1,24 @@
+header {
+  height: 50px;
+  color: white;
+  background: black;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  padding: 10px;
+  text-justify: center;
+}
+
+section {
+  display: flex;
+}
+
+.pack-circle {
+  border: 10px solid black;
+}
+
+img {
+  height: 25%;
+  width: 25%;
+  border: 10px solid black;
+  margin-right: 50px;
+}
