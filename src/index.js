@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     return {
       pass: d.binary === "FAIL" ? false : true,
       year: d.year,
-      title: d.title,
+      title: d.title.length > 24 ? `${d.title.slice(0, 23)}...` : d.title,
       budget: +d.domgross,
       decade: `${d.year.slice(0, 3)}0`,
     };
@@ -16,6 +16,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   dataset.then(res => {
     let pc = new PackCircle(res);
+  });
+
+  document.getElementById("info").addEventListener("click", () => {
+    let el = document.getElementById("overlay");
+
+    if (el.className === "overlay") {
+      el.classList.remove("overlay");
+    } else {
+    el.classList.add("overlay");
+    }
   });
 });
 

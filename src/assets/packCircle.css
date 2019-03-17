@@ -4,13 +4,34 @@ header {
   background: black;
   margin-bottom: 10px;
   box-sizing: border-box;
-  padding: 20px;
   text-justify: center;
-  font-family: 'Londrina Outline', cursive;
+  font-family: 'Londrina Shadow', cursive;
   text-transform: uppercase;
-  text-shadow: 2px 2px 1px grey;
+  text-shadow: 1px 1px 1px white;
   font-size: 40px;
   box-shadow: 3px 3px 3px black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+}
+
+header div {
+  background: white;
+  color: black;
+  font-family: 'Londrina Shadow', cursive;
+  height: 100%;
+  align-items: center;
+  border: 3px solid black;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+header div:hover {
+  background: black;
+  color: white;
+  border-bottom: 3px solid red;
+  cursor: pointer;
 }
 
 text.title {
@@ -21,6 +42,25 @@ text.title {
 
 text.child-node {
   font-size: 48px;
+  overflow: hidden;
+}
+
+.canvas {
+  position: relative;
+}
+
+#overlay {
+  display: none;
+}
+
+ #overlay.overlay {
+  display: flex;
+  position: absolute;
+  background: black;
+  height: 100%;
+  width: 100%;
+  color: white;
+  font-family: 'Londrina Outline', cursive;
 }
 
 section {
@@ -28,6 +68,7 @@ section {
   font-family: 'Londrina Solid', cursive;
   font-size: 72px;
   text-shadow: 4px 4px 3px white;
+  overflow: hidden;
 }
 
 .pack-circle {
@@ -35,8 +76,8 @@ section {
 }
 
 img {
-  height: 25%;
-  width: 25%;
+  height: 35%;
+  width: 35%;
   border: 10px solid black;
-  margin-right: 50px;
+  margin-right: 40px;
 }

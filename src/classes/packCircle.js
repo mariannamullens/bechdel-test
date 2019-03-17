@@ -61,7 +61,7 @@ class PackCircle {
       view = v;
 
       text.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
-      text.attr("font-size", d => `${(d.r / 3) * k}px`);
+      text.attr("font-size", d => `${(d.r / 5) * k}px`);
       circles.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
       circles.attr("r", d => d.r * k);
     }
