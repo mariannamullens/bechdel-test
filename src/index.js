@@ -20,11 +20,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   document.getElementById("info").addEventListener("click", () => {
     let el = document.getElementById("overlay");
+    let el2 = document.getElementById("bechdel-overlay");
 
     if (el.className === "overlay") {
       el.classList.remove("overlay");
+      el2.classList.remove("bechdel-overlay");
+      document.getElementById("info").innerHTML = "Learn More";
     } else {
-    el.classList.add("overlay");
+      el.classList.add("overlay");
+      el2.classList.add("bechdel-overlay");
+      document.getElementById("info").innerHTML = "Show Graph";
     }
   });
 });

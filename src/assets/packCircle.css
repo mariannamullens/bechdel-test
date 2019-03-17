@@ -2,7 +2,7 @@ header {
   height: 75px;
   color: white;
   background: black;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   box-sizing: border-box;
   text-justify: center;
   font-family: 'Londrina Shadow', cursive;
@@ -47,24 +47,73 @@ text.child-node {
 
 .canvas {
   position: relative;
+  height: 770px;
+  width: 770px;
 }
 
-#overlay {
+#overlay, #bechdel-overlay {
   display: none;
 }
 
  #overlay.overlay {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   position: absolute;
   background: black;
   height: 100%;
   width: 100%;
   color: white;
-  font-family: 'Londrina Outline', cursive;
+  font-family: 'Londrina Solid', cursive;
+  text-shadow: none;
+  opacity: .93;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+ #bechdel-overlay.bechdel-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  background: black;
+  height: 770px;
+  width: 100%;
+  color: white;
+  font-family: 'Londrina Solid', cursive;
+  text-shadow: none;
+  opacity: .93;
+  box-sizing: border-box;
+  padding: 40px;
+}
+
+#overlay.overlay h1 {
+  margin: 25px;
+}
+
+#overlay.overlay p {
+  font-size: 36px;
+  margin: 20px;
+}
+
+#bechdel-overlay.bechdel-overlay p {
+  font-size: 32px;
+}
+#bechdel-overlay.bechdel-overlay ul {
+  font-size: 32px;
+}
+
+#overlay.overlay ul {
+  font-size: 36px;
+}
+
+#overlay a {
+  color: red;
 }
 
 section {
   display: flex;
+  justify-content: space-around;
   font-family: 'Londrina Solid', cursive;
   font-size: 72px;
   text-shadow: 4px 4px 3px white;
@@ -75,9 +124,12 @@ section {
   border: 10px solid black;
 }
 
-img {
-  height: 35%;
-  width: 35%;
+.image {
+  position: relative;
+}
+
+div img {
+  height: 750px;
+  width: 580px;
   border: 10px solid black;
-  margin-right: 40px;
 }
