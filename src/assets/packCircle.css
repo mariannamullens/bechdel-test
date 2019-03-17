@@ -1,15 +1,33 @@
 header {
-  height: 50px;
+  height: 75px;
   color: white;
   background: black;
   margin-bottom: 10px;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 20px;
   text-justify: center;
+  font-family: 'Londrina Outline', cursive;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 1px grey;
+  font-size: 40px;
+  box-shadow: 3px 3px 3px black;
+}
+
+text.title {
+  font-size: 12px;
+  color: black;
+  text-shadow: 4px 4px 3px white;
+}
+
+text.child-node {
+  font-size: 48px;
 }
 
 section {
   display: flex;
+  font-family: 'Londrina Solid', cursive;
+  font-size: 72px;
+  text-shadow: 4px 4px 3px white;
 }
 
 .pack-circle {
