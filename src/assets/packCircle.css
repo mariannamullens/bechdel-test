@@ -5,7 +5,7 @@ header {
   margin-bottom: 30px;
   box-sizing: border-box;
   text-justify: center;
-  font-family: 'Londrina Shadow', cursive;
+  font-family: 'Londrina Solid', cursive;
   text-transform: uppercase;
   text-shadow: 1px 1px 1px white;
   font-size: 40px;
@@ -25,6 +25,7 @@ header div {
   border: 3px solid black;
   padding: 8px;
   box-sizing: border-box;
+  border-radius: 4px;
 }
 
 header div:hover {
@@ -68,7 +69,7 @@ text.child-node {
   text-shadow: none;
   opacity: .93;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 0 40px;
 }
 
  #bechdel-overlay.bechdel-overlay {
@@ -84,30 +85,39 @@ text.child-node {
   text-shadow: none;
   opacity: .93;
   box-sizing: border-box;
-  padding: 40px;
+  padding: 0 40px;
 }
 
 #overlay.overlay h1 {
-  margin: 25px;
+  margin: 15px;
 }
 
 #overlay.overlay p {
   font-size: 36px;
-  margin: 20px;
+  margin-top: 0;
+  /* margin: 20px; */
+}
+
+#bechdel-overlay.bechdel-overlay h1 {
+  margin: 15px;
 }
 
 #bechdel-overlay.bechdel-overlay p {
-  font-size: 32px;
-}
-#bechdel-overlay.bechdel-overlay ul {
-  font-size: 32px;
+  font-size: 30px;
+  margin-top: 0;
 }
 
 #overlay.overlay ul {
+  margin-top: 0;
   font-size: 36px;
 }
 
-#overlay a {
+#bechdel-overlay.bechdel-overlay ol {
+  margin-top: 0;
+  font-size: 30px;
+}
+
+#overlay a, #bechdel-overlay a {
   color: red;
 }
 

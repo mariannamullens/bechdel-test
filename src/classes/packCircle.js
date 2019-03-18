@@ -18,7 +18,7 @@ class PackCircle {
 
     let packLayout = d3.pack()
       .size([750, 750])
-      (root.sum(d => d.budget));
+      (root.sum(d => d.domGross));
 
     let allNodes = root.descendants();
     let focus = packLayout;
@@ -42,6 +42,7 @@ class PackCircle {
       .attr("r", d => d.r)
       .attr("stroke", d => !d.children ? "" : "white")
       .attr("fill", d => d.children ? "black" : d.data.pass ? "white" : "red")
+      .style("cursor", "pointer")
       .on("click", d => focus !== d && (zoom(d), d3.event.stopPropagation()));
 
     let text = canvas.append("g")

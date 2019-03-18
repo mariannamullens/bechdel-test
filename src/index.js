@@ -1,5 +1,4 @@
 import * as d3 from 'd3';
-import CalendarChart from './classes/calendar';
 import PackCircle from './classes/packCircle';
 import './assets/packCircle.css';
 
@@ -9,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       pass: d.binary === "FAIL" ? false : true,
       year: d.year,
       title: d.title.length > 24 ? `${d.title.slice(0, 23)}...` : d.title,
-      budget: +d.domgross,
+      domGross: +d.domgross,
       decade: `${d.year.slice(0, 3)}0`,
     };
   });
@@ -25,11 +24,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
     if (el.className === "overlay") {
       el.classList.remove("overlay");
       el2.classList.remove("bechdel-overlay");
-      document.getElementById("info").innerHTML = "Learn More";
+      document.getElementById("info").innerHTML = "Click to Learn More";
     } else {
       el.classList.add("overlay");
       el2.classList.add("bechdel-overlay");
-      document.getElementById("info").innerHTML = "Show Graph";
+      document.getElementById("info").innerHTML = "Click to Show Graph";
     }
   });
 });
