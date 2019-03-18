@@ -32,5 +32,3 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
   });
 });
-
-console.log("this should not be broken");
